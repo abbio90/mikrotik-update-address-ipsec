@@ -10,12 +10,12 @@
 #
 #----------NO MODIFY THIS SECTION----------
 {
-:local IPVida [/ip firewall address-list get [find comment="foisfabio.duckdns.org"] value-name=address]
+:local IPfabio [/ip firewall address-list get [find comment="foisfabio.duckdns.org"] value-name=address]
 :local IPsec [/ip ipsec peer get [find comment="Peer-foisfabio.it"] value-name=address]
 :local IPpeer [:pick $IPsec 0 [:find $IPsec "/"]]
 :put $IPfabio
 :put $IPpeer
-:if ($IPVida!=$IPpeer) do={
+:if ($IPfabio!=$IPpeer) do={
 /ip ipsec peer set [find comment="Peer-foisfabio.it"] address=$IPfabio
 :log info "INDIRIZZO IP PEER foisfabio AGGIORNATO CON SUCCESSO"
 } else={
