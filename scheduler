@@ -1,0 +1,4 @@
+add comment="peer-fabio" disabled=no interval=2m name=\
+    schedule-script-fabio on-event="/system script run script-update_peer" \
+    policy=ftp,reboot,read,write,policy,test,password,sniff,sensitive,romon \
+    start-date=mar/01/1970 start-time=00:00:00
