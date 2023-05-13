@@ -1,0 +1,24 @@
+#----------SCRIPT UPDATE IP ADDRESS PEER IPSEC----------
+#
+# Script:  Ip Address Peer Update Script
+# Version: 1.0
+# Created: 20/04/2023
+# Updated: no updated
+# Author:  Fabio Fois
+# Website: https://foisfabio.it
+# Email: consulenza@foisfabio.it
+#
+#----------NO MODIFY THIS SECTION----------
+{
+:local IPVida [/ip firewall address-list get [find comment="foisfabio.duckdns.org"] value-name=address]
+:local IPsec [/ip ipsec peer get [find comment="Peer-foisfabio.it"] value-name=address]
+:local IPpeer [:pick $IPsec 0 [:find $IPsec "/"]]
+:put $IPfabio
+:put $IPpeer
+:if ($IPVida!=$IPpeer) do={
+/ip ipsec peer set [find comment="Peer-foisfabio.it"] address=$IPfabio
+:log info "INDIRIZZO IP PEER foisfabio AGGIORNATO CON SUCCESSO"
+} else={
+:log info "INDIRIZZO PEER CONGRUO AL DOMINIO foisfabio"
+}
+}
